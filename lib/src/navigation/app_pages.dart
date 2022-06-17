@@ -12,7 +12,7 @@ class AppPages{
     //=====Principal pages=====
     GetPage(
       name: "/home", 
-      page: () => const HomePageMobile(),
+      page: () => HomePageMobile(),
       binding: HomeBinding(),
     ),
 //     GetPage(

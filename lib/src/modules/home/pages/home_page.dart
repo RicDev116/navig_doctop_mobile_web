@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import 'package:navigation_propuesta/src/modules/home/home_controller.dart';
+import 'package:navigation_propuesta/src/utils/responsive_widget.dart';
 import 'package:navigation_propuesta/src/utils/screen.dart';
 
-class HomePageMobile extends GetView<HomeController> {
+class HomePageMobile extends ResponsiveWidgetV2 {
 
-  const HomePageMobile({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
+  HomePageMobile({
+    Key? key
+  }) : super(
+    key: key,
+    body: SafeArea(
       child: Scaffold(
         body: Column(
           children: [
             SizedBox(height: Screen.percentHeight(12)),
-            Container(
+            SizedBox(
               width: double.infinity,
               height: Screen.percentHeight(30),
               child: ListView.builder(
@@ -40,8 +38,8 @@ class HomePageMobile extends GetView<HomeController> {
           ],
         ),
       ),
-    );
-  }
+    )
+  );
 }
 
 class MyRow extends StatelessWidget {

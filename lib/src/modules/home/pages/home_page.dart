@@ -8,7 +8,14 @@ class HomePageMobile extends ResponsiveWidgetV2 {
     Key? key
   }) : super(
     key: key,
-    body: SafeArea(
+    bodyDesktop: Center(
+      child: Container(
+        width: 200,
+        height: 200,
+        color: Colors.red,
+      ),
+    ),
+    bodyMobile: SafeArea(
       child: Scaffold(
         body: Column(
           children: [

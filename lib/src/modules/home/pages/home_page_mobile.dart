@@ -63,21 +63,26 @@ class MyRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          color: Colors.black,
-          width: Screen.percentWidth(45),
-          height: Screen.percentHeight(12),
-        ),
-        SizedBox(width: Screen.percentWidth(1)),
-        Container(
-          color: Colors.black,
-          width: Screen.percentWidth(45),
-          height: Screen.percentHeight(12),
-        ), 
-      ],
+    return Container(
+      color: Colors.red,
+      width: double.infinity,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            color: Colors.black,
+            width: Screen.percentWidth(45),
+            height: Screen.percentHeight(12),
+          ),
+          SizedBox(width: Screen.percentWidth(1)),
+          Container(
+            color: Colors.black,
+            width: Screen.percentWidth(45),
+            height: Screen.percentHeight(12),
+          ), 
+        ],
+      ),
     );
   }
 }

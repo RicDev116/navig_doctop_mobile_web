@@ -44,11 +44,11 @@ class HomePageMobile extends ResponsiveWidgetV2 {
               ),
             ),
             SizedBox(height: Screen.percentHeight(2)),
-            const MyRow(),
+            MyRow(),
             SizedBox(height: Screen.percentHeight(2)),
-            const MyRow(),
+            MyRow(),
             SizedBox(height: Screen.percentHeight(2)),
-            const MyRow(),
+            MyRow(),
           ],
         ),
       ),
@@ -57,7 +57,7 @@ class HomePageMobile extends ResponsiveWidgetV2 {
 }
 
 class MyRow extends StatelessWidget {
-  const MyRow({
+  MyRow({
     Key? key,
   }) : super(key: key);
 
@@ -71,6 +71,7 @@ class MyRow extends StatelessWidget {
           width: Screen.percentWidth(45),
           height: Screen.percentHeight(12),
         ),
+        SizedBox(width: Screen.percentWidth(1)),
         Container(
           color: Colors.black,
           width: Screen.percentWidth(45),

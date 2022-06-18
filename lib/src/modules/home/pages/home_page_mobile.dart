@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:navigation_propuesta/src/utils/responsive_widget.dart';
 import 'package:navigation_propuesta/src/utils/screen.dart';
 
@@ -13,6 +14,12 @@ class HomePageMobile extends ResponsiveWidgetV2 {
         width: 200,
         height: 200,
         color: Colors.red,
+        child: Center(
+          child: TextButton(
+            onPressed: () => Get.toNamed("/notifications"), 
+            child: const Text("Notificaciones"),
+          ),
+        ),
       ),
     ),
     bodyMobile: SafeArea(

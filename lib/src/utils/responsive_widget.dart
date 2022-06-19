@@ -71,26 +71,28 @@ abstract class ResponsiveWidgetV2<T> extends GetView<T> {
 
     print("Device is movil? " + isMobileDevice.toString());
 
-    return Scaffold(
-      appBar: isMobileDevice
-      ?GenericAppBar(
-        hasControllNavigation: (isWebDevice && isSmallDevice)?false:true,//Aquí se identifica que no va a haber navegación si es webdevice y smallDevice
-      )
-      :GenericDeskBar() as PreferredSizeWidget,
-      body: Builder(
-        builder: (context){
-          late Widget body;
-          if(isWebDevice && isBigDevice){
-            body = bodyDesktop;
-          }
-          if(isMobileDevice){
-            body = bodyMobile;
-          }
-          if(isWebDevice && isSmallDevice){
-            body = bodyMobile; //TODO WITHOUT NAVIGATION
-          }
-          return body;
-        } 
+    return SafeArea(
+      child: Scaffold(
+        appBar: isMobileDevice
+        ?GenericAppBar(
+          hasControllNavigation: (isWebDevice && isSmallDevice)?false:true,//Aquí se identifica que no va a haber navegación si es webdevice y smallDevice
+        )
+        :GenericDeskBar() as PreferredSizeWidget,
+        body: Builder(
+          builder: (context){
+            late Widget body;
+            if(isWebDevice && isBigDevice){
+              body = bodyDesktop;
+            }
+            if(isMobileDevice){
+              body = bodyMobile;
+            }
+            if(isWebDevice && isSmallDevice){
+              body = bodyMobile; //TODO WITHOUT NAVIGATION
+            }
+            return body;
+          } 
+        ),
       ),
     );
   }

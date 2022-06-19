@@ -1,42 +1,43 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:navigation_propuesta/src/widgets/generic_app_bar.dart';
 
-import '../widgets/generic_app_bar.dart';
-
-
-abstract class ResponsiveWidget<T> extends GetView<T> {
-
-  const ResponsiveWidget({
-    Key? key,
-  }) : super(key: key);
-
-  //TODO AGRAGAR BARRA DE ARRIBA EN WEB AQUI
+// import '../widgets/generic_app_bar.dart';
 
 
+// abstract class ResponsiveWidget<T> extends GetView<T> {
 
-  Widget buildMobile(BuildContext context, double maxWidth);
-  Widget buildDesktop(BuildContext context, double maxWidth);
+//   const ResponsiveWidget({
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
+//   //TODO AGRAGAR BARRA DE ARRIBA EN WEB AQUI
 
-    Get.find<T>;
 
-    const bool deviceIsWeb = kIsWeb;
 
-    return LayoutBuilder(builder: (context, constraints) {
+//   Widget buildMobile(BuildContext context, double maxWidth);
+//   Widget buildDesktop(BuildContext context, double maxWidth);
 
-      final bool isSmallDevice = constraints.maxWidth <= 900;
+//   @override
+//   Widget build(BuildContext context) {
 
-      if (deviceIsWeb && isSmallDevice) {
-        return buildMobile(context, constraints.maxWidth);
-      } else if(deviceIsWeb && isSmallDevice){
-        return buildDesktop(context, constraints.maxWidth);
-      }
-    });
-  }
-}
+//     Get.find<T>;
+
+//     const bool deviceIsWeb = kIsWeb;
+
+//     return LayoutBuilder(builder: (context, constraints) {
+
+//       final bool isSmallDevice = constraints.maxWidth <= 900;
+
+//       if (deviceIsWeb && isSmallDevice) {
+//         return buildMobile(context, constraints.maxWidth);
+//       } else if(deviceIsWeb && isSmallDevice){
+//         return buildDesktop(context, constraints.maxWidth);
+//       }
+//     });
+//   }
+// }
 
 
 abstract class ResponsiveWidgetV2<T> extends GetView<T> {

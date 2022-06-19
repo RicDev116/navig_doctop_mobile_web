@@ -66,20 +66,25 @@ class MyRow extends StatelessWidget {
     return Container(
       color: Colors.red,
       width: double.infinity,
+      height: Screen.percentHeight(10),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(
-            color: Colors.black,
-            width: Screen.percentWidth(45),
-            height: Screen.percentHeight(12),
+          Expanded(
+            child: Container(
+              color: Colors.black,
+              width: Screen.percentWidth(45),
+              height: Screen.percentHeight(12),
+            ),
           ),
           SizedBox(width: Screen.percentWidth(1)),
-          Container(
-            color: Colors.black,
-            width: Screen.percentWidth(45),
-            height: Screen.percentHeight(12),
+          Expanded(
+            child: Container(
+              color: Colors.green,
+              width: Screen.percentWidth(45),
+              height: Screen.percentHeight(12),
+            ),
           ), 
         ],
       ),

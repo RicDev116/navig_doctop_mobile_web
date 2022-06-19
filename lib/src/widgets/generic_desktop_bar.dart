@@ -1,68 +1,8 @@
+//import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:navigation_propuesta/src/utils/screen.dart';
 
-
-class GenericDesktopBar extends StatelessWidget{
-  final double wScreen;
-  final bool isMobile;
-  final double? radius;
-  final Function() drawerFunction;
-  final Function() profileFunction;
-
-
-  const GenericDesktopBar(
-    this. wScreen, this.isMobile,this.drawerFunction,this.profileFunction,
-      {Key? key,
-        this.radius = 20,
-      }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        // padding: EdgeInsets.all(spacingSmall),
-        padding:  const EdgeInsets.all(10),
-        child: Container(
-          width: double.infinity,
-          height: Screen.percentHeight(10),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // SvgPicture.asset(getImagePath("logo_bar", extension: SVG), height: HomeModule.BARHEIGHT * .4),
-              // SwitchDontBother(false, wScreen, controller),
-              // Row(
-              //   children: [
-              //     _createActions(),
-              //     spacingLargeh,
-              //     BarProfileData(profileFunction,isMobile),
-              //     spacingSmallh,
-              //     IconMenu(isMobile, drawerFunction)
-              //   ],
-              // )
-            ],
-          ),
-        ));
-  }
-
-  // Widget _createActions() {
-  //   return Row(
-  //     children: [
-  //       IconPanic(controller, 1, false),
-  //       spacingSmallh,
-  //       IconChat(isMobile),
-  //       spacingSmallh,
-  //       IconNotification()
-  //     ],
-  //   );
-  // }
-
-
-}
-
-
-
-class GenericAppBarMobile extends StatelessWidget
+class GenericDeskBar extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
   final Color titleColor;
@@ -72,7 +12,7 @@ class GenericAppBarMobile extends StatelessWidget
   final Color backgroundColor;
   final Color backButtonColor;
 
-  GenericAppBarMobile(
+  GenericDeskBar(
       {Key? key,
       this.title = "",
       this.titleColor = Colors.black,
@@ -93,43 +33,79 @@ class GenericAppBarMobile extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     backButton ??= () {
-      Get.back(result: false);
+      Get.back(result: false);  
     };
 
     return AppBar(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      automaticallyImplyLeading: false,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            // style: AppTheme.textAppBarMediumBold.copyWith(color: titleColor),
+          Row(
+            children: const[
+              Icon(Icons.home),
+              Text("SDC"),
+              Text('.'),
+              Text('Residencial'),
+            ],
           ),
-          if (subtitle != null)
-            Container(
-              margin: const EdgeInsets.only(top: 5),
-              child: Text(
-                subtitle!,
-                // style: AppTheme.textNormal,
-              ),
+          Container(
+            color: Colors.blueGrey,
+            child: Row(
+              children: [
+                const Icon(Icons.face),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text('Si recibo visitas'),
+                    Text('presiona para restringir visitas'),
+                  ],
+                )
+              ],
             ),
+          ),
+          Row(
+            children: const[
+              Icon(Icons.sos),
+              Icon(Icons.message),
+              Icon(Icons.notifications),
+            ],
+          ),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: const [
+                  Text("Esteban Arriaga"),
+                  Text("Calle Estrellas #34"),
+                ],
+              ),
+              const Icon(Icons.message),
+              const Icon(Icons.notifications),
+            ],
+          ),
         ],
       ),
-      leading: Visibility(
-        visible: isLeading,
-        child: IconButton(
-          icon: Icon(
-            Icons.chevron_left_outlined,
-            color: backButtonColor,
-          ),
-          // tooltip: tr('back__button'),
-          onPressed: backButton,
-        ),
-      ),
-      leadingWidth: !isLeading ? 0 : null,
-      backgroundColor: backgroundColor,
+      // Row(
+      //   children: [
+      //     Icon(Icons.home),
+      //     Text("SDC"),
+      //     Text("."),
+      //     Text('Residencial'),
+      //   ],
+      // ),
+      // leading: Row(
+      //   children: [
+      //     Icon(Icons.home),
+      //     Text('SDC'),
+      //     Text('.'),
+      //     Text('Residencial'),
+      //   ],
+      // ),
+      // leadingWidth: !isLeading ? 0 : null,
+      backgroundColor: Colors.blue,
       actions: actions,
+
     );
   }
 }
-
-

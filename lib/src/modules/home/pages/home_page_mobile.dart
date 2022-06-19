@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:navigation_propuesta/src/utils/responsive_widget.dart';
 import 'package:navigation_propuesta/src/utils/screen.dart';
 
@@ -13,6 +14,12 @@ class HomePageMobile extends ResponsiveWidgetV2 {
         width: 200,
         height: 200,
         color: Colors.red,
+        child: Center(
+          child: TextButton(
+            onPressed: () => Get.toNamed("/notifications"), 
+            child: const Text("Notificaciones"),
+          ),
+        ),
       ),
     ),
     bodyMobile: SafeArea(
@@ -37,11 +44,11 @@ class HomePageMobile extends ResponsiveWidgetV2 {
               ),
             ),
             SizedBox(height: Screen.percentHeight(2)),
-            const MyRow(),
+            MyRow(),
             SizedBox(height: Screen.percentHeight(2)),
-            const MyRow(),
+            MyRow(),
             SizedBox(height: Screen.percentHeight(2)),
-            const MyRow(),
+            MyRow(),
           ],
         ),
       ),
@@ -50,26 +57,32 @@ class HomePageMobile extends ResponsiveWidgetV2 {
 }
 
 class MyRow extends StatelessWidget {
-  const MyRow({
+  MyRow({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          color: Colors.black,
-          width: Screen.percentWidth(45),
-          height: Screen.percentHeight(12),
-        ),
-        Container(
-          color: Colors.black,
-          width: Screen.percentWidth(45),
-          height: Screen.percentHeight(12),
-        ), 
-      ],
+    return Container(
+      color: Colors.red,
+      width: double.infinity,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            color: Colors.black,
+            width: Screen.percentWidth(45),
+            height: Screen.percentHeight(12),
+          ),
+          SizedBox(width: Screen.percentWidth(1)),
+          Container(
+            color: Colors.black,
+            width: Screen.percentWidth(45),
+            height: Screen.percentHeight(12),
+          ), 
+        ],
+      ),
     );
   }
 }

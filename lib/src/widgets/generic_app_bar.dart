@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class GenericAppBarMobile extends StatelessWidget
+class GenericAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
   final Color titleColor;
@@ -11,8 +11,10 @@ class GenericAppBarMobile extends StatelessWidget
   final List<Widget>? actions;
   final Color backgroundColor;
   final Color backButtonColor;
+  final String? subtitle;
+  final bool hasControllNavigation;
 
-  GenericAppBarMobile(
+  GenericAppBar(
       {Key? key,
       this.title = "",
       this.titleColor = Colors.black,
@@ -22,10 +24,10 @@ class GenericAppBarMobile extends StatelessWidget
       this.actions,
       this.backgroundColor = Colors.white,
       this.backButtonColor = Colors.black,
+      this.hasControllNavigation = true,
       })
       : super(key: key);
 
-  final String? subtitle;
 
   @override
   Size get preferredSize => const Size.fromHeight(50);
@@ -37,6 +39,7 @@ class GenericAppBarMobile extends StatelessWidget
     };
 
     return AppBar(
+      automaticallyImplyLeading: hasControllNavigation,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

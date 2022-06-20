@@ -51,28 +51,59 @@ abstract class ResponsiveWidgetV2<T> extends GetView<T> {
       Get.back();
     }
 
+    late PreferredSizeWidget appBar;
+    if(isMobileDevice){
+
+      if(isHome){
+        appBar = const PreferredSize(
+          preferredSize: Size.zero,
+          child: SizedBox()
+        );
+      }else{
+        appBar = GenericAppBar(
+          hasControllNavigation: true,
+          title: title??"",
+        );
+      }
+
+    }else if(isWebDevice){
+
+      if(screenIsLargerThanHalf!){
+        appBar = GenericDeskBar(
+          isHome: isHome,
+          title: title??"",
+        );
+      }else if(isSmallDevice){
+        appBar = GenericAppBar(
+          hasControllNavigation: false,
+          title: title??"",
+        );
+      }
+
+    }
+
     return SafeArea(
       child: Scaffold(
-        appBar: isWebDevice && isBigDevice
-          ?GenericDeskBar(
-            isHome: isHome,
-            title: title??"",
-          )
-          :isMobileDevice
-            ?GenericAppBar(
-              hasControllNavigation: true,
-              title: title??"",
-            )
-            :isHome
-              ?const PreferredSize(
-                preferredSize: Size.zero,
-                child: SizedBox()
-              )
-              :GenericAppBar(
-                hasControllNavigation: (isWebDevice && isSmallDevice)?false:true,
-                title: title??"",//Aquí se identifica que no va a haber navegación si es webdevice y smallDevice,
-              ) as PreferredSizeWidget,
-        
+        appBar: SelectContent().selectTypeAppBar(isHome, title),
+        // isWebDevice && isBigDevice
+        //   ?GenericDeskBar(
+        //     isHome: isHome,
+        //     title: title??"",
+        //   )
+        //   :isMobileDevice
+        //     ?GenericAppBar(
+        //       hasControllNavigation: true,
+        //       title: title??"",
+        //     )
+        //     :isHome
+        //       ?const PreferredSize(
+        //         preferredSize: Size.zero,
+        //         child: SizedBox()
+        //       )
+        //       :GenericAppBar(
+        //         hasControllNavigation: (isWebDevice && isSmallDevice)?false:true,
+        //         title: title??"",//Aquí se identifica que no va a haber navegación si es webdevice y smallDevice,
+        //       ) as PreferredSizeWidget,
         body: Builder(
           builder: (context){
 
@@ -99,6 +130,73 @@ abstract class ResponsiveWidgetV2<T> extends GetView<T> {
     );
   }
 }   
+
+class SelectContent{
+
+
+
+
+
+  static const bool _isMobileDevice = !kIsWeb;
+  static const bool _isWebDevice = kIsWeb;
+
+
+
+  final bool _isSmallDevice = MediaQuery.of(Get.context!).size.width <= 750;
+  final bool _isBigDevice = MediaQuery.of(Get.context!).size.width > 750;
+
+  
+
+  bool? screenIsLessThanOrEqualToHalf = MediaQuery.of(Get.context!).size.width <= (window.screen!.width!.toDouble() / 2);
+  bool? screenIsLargerThanHalf= MediaQuery.of(Get.context!).size.width > (window.screen!.width!.toDouble() / 2);
+
+
+
+
+  PreferredSizeWidget selectTypeAppBar(bool isHome, String? title){
+
+    late PreferredSizeWidget appBar;
+
+    if(_isMobileDevice){
+
+      if(isHome){
+        appBar = const PreferredSize(
+          preferredSize: Size.zero,
+          child: SizedBox()
+        );
+      }else{
+        appBar = GenericAppBar(
+          hasControllNavigation: true,
+          title: title??"",
+        );
+      }
+
+    }else if(_isWebDevice){
+
+      if(screenIsLargerThanHalf!){
+        appBar = GenericDeskBar(
+          isHome: isHome,
+          title: title??"",
+        );
+      }else if(_isSmallDevice){
+        appBar = GenericAppBar(
+          hasControllNavigation: false,
+          title: title??"",
+        );
+      }
+
+    }
+    return appBar;
+  }
+
+
+
+
+
+
+
+
+}
 
 
 

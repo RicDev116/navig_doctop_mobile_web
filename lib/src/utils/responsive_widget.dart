@@ -179,10 +179,17 @@ class SelectContent{
           title: title??"",
         );
       }else if(_isSmallDevice){
-        appBar = GenericAppBar(
-          hasControllNavigation: false,
-          title: title??"",
-        );
+        if(isHome){
+          appBar = const PreferredSize(
+            preferredSize: Size.zero,
+            child: SizedBox()
+          );
+        }else{
+          appBar = GenericAppBar(
+            hasControllNavigation: false,
+            title: title??"",
+          );
+        }
       }
 
     }

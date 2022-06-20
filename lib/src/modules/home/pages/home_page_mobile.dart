@@ -1,10 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:navigation_propuesta/src/modules/home/home_controller.dart';
 import 'package:navigation_propuesta/src/utils/responsive_widget.dart';
 import 'package:navigation_propuesta/src/utils/screen.dart';
 
-class HomePageMobile extends ResponsiveWidgetV2 {
+class HomePageMobile extends ResponsiveWidgetV2<HomeController> {
 
   HomePageMobile({
     Key? key
@@ -27,18 +29,9 @@ class HomePageMobile extends ResponsiveWidgetV2 {
         SizedBox(
           width: double.infinity,
           height: Screen.percentHeight(30),
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 5,
-            itemBuilder: ((context, index) {
-              return Container(
-                margin: EdgeInsets.only(left: Screen.percentWidth(1)),
-                color: Colors.green,
-                width: Screen.percentWidth(80),
-                height: Screen.percentHeight(20),
-              );
-            })
-          ),
+          child: kIsWeb
+          ?const MyScrollListView()
+          :const MyListView(),
         ),
         SizedBox(height: Screen.percentHeight(2)),
         MyRow(),
@@ -50,6 +43,47 @@ class HomePageMobile extends ResponsiveWidgetV2 {
     ),
   );
 }
+
+class MyScrollListView extends GetView<HomeController> {
+
+  const MyScrollListView({
+    Key? key,
+  }) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scrollbar(
+      controller: controller.scrollController,
+      child: const MyListView(),
+    );
+  }
+}
+
+class MyListView extends GetView<HomeController> {
+  const MyListView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      controller: controller.scrollController,
+      scrollDirection: Axis.horizontal,
+      itemCount: 5,
+      itemBuilder: ((context, index) {
+        return Container(
+          margin: EdgeInsets.only(left: Screen.percentWidth(1)),
+          color: Colors.green,
+          width: Screen.percentWidth(80),
+          height: Screen.percentHeight(20),
+        );
+      })
+    );
+  }
+}
+
+
 
 class MyButtonText extends GetView<HomeController> {
   const MyButtonText({

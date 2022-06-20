@@ -51,59 +51,9 @@ abstract class ResponsiveWidgetV2<T> extends GetView<T> {
       Get.back();
     }
 
-    late PreferredSizeWidget appBar;
-    if(isMobileDevice){
-
-      if(isHome){
-        appBar = const PreferredSize(
-          preferredSize: Size.zero,
-          child: SizedBox()
-        );
-      }else{
-        appBar = GenericAppBar(
-          hasControllNavigation: true,
-          title: title??"",
-        );
-      }
-
-    }else if(isWebDevice){
-
-      if(screenIsLargerThanHalf!){
-        appBar = GenericDeskBar(
-          isHome: isHome,
-          title: title??"",
-        );
-      }else if(isSmallDevice){
-        appBar = GenericAppBar(
-          hasControllNavigation: false,
-          title: title??"",
-        );
-      }
-
-    }
-
     return SafeArea(
       child: Scaffold(
         appBar: SelectContent().selectTypeAppBar(isHome, title),
-        // isWebDevice && isBigDevice
-        //   ?GenericDeskBar(
-        //     isHome: isHome,
-        //     title: title??"",
-        //   )
-        //   :isMobileDevice
-        //     ?GenericAppBar(
-        //       hasControllNavigation: true,
-        //       title: title??"",
-        //     )
-        //     :isHome
-        //       ?const PreferredSize(
-        //         preferredSize: Size.zero,
-        //         child: SizedBox()
-        //       )
-        //       :GenericAppBar(
-        //         hasControllNavigation: (isWebDevice && isSmallDevice)?false:true,
-        //         title: title??"",//Aquí se identifica que no va a haber navegación si es webdevice y smallDevice,
-        //       ) as PreferredSizeWidget,
         body: Builder(
           builder: (context){
 

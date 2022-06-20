@@ -1,0 +1,6 @@
+Contras
+
+1-. se requiren clases en todos los widgets puesto que no se puede llamar al controlador de la pagina en el consturctor,
+es necesario crear una clase despues del constructor, llamando a GetView<controlador>
+
+2-.  

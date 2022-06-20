@@ -47,6 +47,9 @@ class GenericAppBar extends StatelessWidget
           Text(
             title,
             // style: AppTheme.textAppBarMediumBold.copyWith(color: titleColor),
+            style: TextStyle(
+              color: titleColor,
+            ),
           ),
           if (subtitle != null)
             Container(

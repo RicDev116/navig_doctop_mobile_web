@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:universal_html/html.dart';
 
 import 'package:navigation_propuesta/src/widgets/generic_app_bar.dart';
 import 'package:navigation_propuesta/src/widgets/generic_desktop_bar.dart';
@@ -30,9 +31,17 @@ abstract class ResponsiveWidgetV2<T> extends GetView<T> {
 
     const bool isMobileDevice = !kIsWeb;
     const bool isWebDevice = kIsWeb;
-    final bool isSmallDevice = MediaQuery.of(context).size.width <= 650;
-    final bool isBigDevice = MediaQuery.of(context).size.width > 650;
 
+    final bool isSmallDevice = MediaQuery.of(context).size.width <= 750;
+    final bool isBigDevice = MediaQuery.of(context).size.width > 750;
+
+    bool? screenIsLessThanOrEqualToHalf;
+    bool? screenIsLargerThanHalf;
+
+    if(isWebDevice){
+      screenIsLessThanOrEqualToHalf = MediaQuery.of(context).size.width <= (window.screen!.width!.toDouble() / 2);
+      screenIsLargerThanHalf =  MediaQuery.of(context).size.width > (window.screen!.width!.toDouble() / 2);
+    }
 
     print("Is movil device? " + isMobileDevice.toString());
 
@@ -69,17 +78,19 @@ abstract class ResponsiveWidgetV2<T> extends GetView<T> {
 
             late Widget body;
 
-            if(isWebDevice && isBigDevice){
-              body = bodyDesktop;
-            }
-            if(isMobileDevice){
+            if(isMobileDevice){ 
               body = bodyMobile;
             }
-            if(isWebDevice && isSmallDevice){
-              body = bodyMobile; //TODO WITHOUT NAVIGATION
+
+            if(isWebDevice){
+              if(screenIsLargerThanHalf!){
+                body = bodyDesktop;
+              }else if(screenIsLessThanOrEqualToHalf!){
+                body = bodyMobile;
+              }
             }
+
             return Container(
-              color: Colors.green,
               child: body,
             );
           } 

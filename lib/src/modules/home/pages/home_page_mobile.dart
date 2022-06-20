@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:navigation_propuesta/src/modules/home/home_controller.dart';
 import 'package:navigation_propuesta/src/utils/responsive_widget.dart';
 import 'package:navigation_propuesta/src/utils/screen.dart';
 
@@ -9,54 +10,62 @@ class HomePageMobile extends ResponsiveWidgetV2 {
     Key? key
   }) : super(
     key: key,
+    isHome: true,
     bodyDesktop: Center(
       child: Container(
         width: 200,
         height: 200,
         color: Colors.red,
-        child: Center(
-          child: TextButton(
-            onPressed: () => Get.toNamed("/notifications"), 
-            child: const Text("Notificaciones"),
-          ),
+        child: const Center(
+          child: MyButtonText(),
         ),
       ),
     ),
-    bodyMobile: SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            SizedBox(height: Screen.percentHeight(12)),
-            SizedBox(
-              width: double.infinity,
-              height: Screen.percentHeight(30),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: ((context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(left: Screen.percentWidth(1)),
-                    color: Colors.green,
-                    width: Screen.percentWidth(80),
-                    height: Screen.percentHeight(20),
-                  );
-                })
-              ),
-            ),
-            SizedBox(height: Screen.percentHeight(2)),
-            MyRow(),
-            SizedBox(height: Screen.percentHeight(2)),
-            MyRow(),
-            SizedBox(height: Screen.percentHeight(2)),
-            MyRow(),
-          ],
+    bodyMobile: Column(
+      children: [
+        SizedBox(height: Screen.percentHeight(12)),
+        SizedBox(
+          width: double.infinity,
+          height: Screen.percentHeight(30),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 5,
+            itemBuilder: ((context, index) {
+              return Container(
+                margin: EdgeInsets.only(left: Screen.percentWidth(1)),
+                color: Colors.green,
+                width: Screen.percentWidth(80),
+                height: Screen.percentHeight(20),
+              );
+            })
+          ),
         ),
-      ),
-    )
+        SizedBox(height: Screen.percentHeight(2)),
+        MyRow(),
+        SizedBox(height: Screen.percentHeight(2)),
+        MyRow(),
+        SizedBox(height: Screen.percentHeight(2)),
+        MyRow(),
+      ],
+    ),
   );
 }
 
-class MyRow extends StatelessWidget {
+class MyButtonText extends GetView<HomeController> {
+  const MyButtonText({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () => Get.toNamed("/notifications"), 
+      child: const Text("Notificaciones"),
+    );
+  }
+}
+
+class MyRow extends GetView<HomeController> {
   MyRow({
     Key? key,
   }) : super(key: key);
@@ -72,10 +81,11 @@ class MyRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
-            child: Container(
+            child: Container( 
               color: Colors.black,
               width: Screen.percentWidth(45),
               height: Screen.percentHeight(12),
+              child: const MyButtonText()
             ),
           ),
           SizedBox(width: Screen.percentWidth(1)),

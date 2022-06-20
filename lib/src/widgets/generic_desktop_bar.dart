@@ -1,41 +1,28 @@
 //import 'dart:ffi';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:navigation_propuesta/src/utils/screen.dart';
 
-class GenericDeskBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class GenericDeskBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Color titleColor;
-  final bool isLeading;
-  Function()? backButton;
-  final List<Widget>? actions;
   final Color backgroundColor;
-  final Color backButtonColor;
+  final bool isHome;
 
   GenericDeskBar(
-      {Key? key,
-      this.title = "",
-      this.titleColor = Colors.black,
-      this.isLeading = true,
-      this.backButton,
-      this.subtitle,
-      this.actions,
-      this.backgroundColor = Colors.white,
-      this.backButtonColor = Colors.black,
-      })
-      : super(key: key);
+    {Key? key,
+    this.title = "",
+    this.titleColor = Colors.black,
+    this.backgroundColor = const Color.fromARGB(255, 65, 33, 243),
+    this.isHome = false,
+    }
+  ): super(key: key);
 
-  final String? subtitle;
 
   @override
-  Size get preferredSize => const Size.fromHeight(50);
+  Size get preferredSize => Size.fromHeight(Screen.percentHeight(isHome?10:15));
 
   @override
-  Widget build(BuildContext context) {
-    backButton ??= () {
-      Get.back(result: false);  
-    };
-
+  AppBar build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
       title: Row(
@@ -83,29 +70,26 @@ class GenericDeskBar extends StatelessWidget
               const Icon(Icons.message),
               const Icon(Icons.notifications),
             ],
-          ),
+          ),  
         ],
       ),
-      // Row(
-      //   children: [
-      //     Icon(Icons.home),
-      //     Text("SDC"),
-      //     Text("."),
-      //     Text('Residencial'),
-      //   ],
-      // ),
-      // leading: Row(
-      //   children: [
-      //     Icon(Icons.home),
-      //     Text('SDC'),
-      //     Text('.'),
-      //     Text('Residencial'),
-      //   ],
-      // ),
-      // leadingWidth: !isLeading ? 0 : null,
-      backgroundColor: Colors.blue,
-      actions: actions,
-
+      bottom:isHome
+        ?const PreferredSize(
+          preferredSize: Size.zero,
+          child: SizedBox()
+        )
+        :PreferredSize(
+          preferredSize: Size.fromHeight(Screen.percentHeight(5)),
+          child: Container(
+            color: Colors.white,
+            width: double.infinity,
+            height: Screen.percentHeight(5),
+            child: Center(
+              child: Text(title),
+            ),
+          ),
+        ),
+      backgroundColor: backgroundColor  
     );
   }
 }

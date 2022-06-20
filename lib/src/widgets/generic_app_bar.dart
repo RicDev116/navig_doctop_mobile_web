@@ -40,6 +40,7 @@ class GenericAppBar extends StatelessWidget
 
     return AppBar(
       automaticallyImplyLeading: hasControllNavigation,
+      
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -53,12 +54,12 @@ class GenericAppBar extends StatelessWidget
               child: Text(
                 subtitle!,
                 // style: AppTheme.textNormal,
-              ),
+              ), 
             ),
         ],
       ),
       leading: Visibility(
-        visible: isLeading,
+        visible: hasControllNavigation,
         child: IconButton(
           icon: Icon(
             Icons.chevron_left_outlined,

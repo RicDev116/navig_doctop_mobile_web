@@ -10,6 +10,7 @@ class NotificationsConfigurationPage extends ResponsiveWidgetV2<NotificationsCon
     Key? key
   }) : super(
     key: key,
+    title: "Configuración de notificaciones",
     bodyDesktop: const SizedBox(),
     bodyMobile: const NotificationConfigurationBody()
   );

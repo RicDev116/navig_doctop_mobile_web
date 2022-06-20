@@ -55,6 +55,7 @@ class MyScrollListView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scrollbar(
       controller: controller.scrollController,
+      thumbVisibility: true,
       child: const MyListView(),
     );
   }
